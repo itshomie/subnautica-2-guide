@@ -10,9 +10,10 @@ type Props = {
   canonical?: string;
   image?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 };
 
-const { title, description, canonical = site.url + Astro.url.pathname, image, jsonLd } = Astro.props;
+const { title, description, canonical = site.url + Astro.url.pathname, image, jsonLd, noindex = false } = Astro.props;
 const pageTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 const imageUrl = image ? new URL(image, site.url).toString() : undefined;
@@ -25,6 +26,7 @@ const imageUrl = image ? new URL(image, site.url).toString() : undefined;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />

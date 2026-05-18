@@ -15,10 +15,12 @@ export const GET: APIRoute = () => {
   const urls = [
     { loc: `${site.url}/`, priority: '1.0' },
     ...policyUrls.map((path) => ({ loc: `${site.url}${path}`, priority: '0.5' })),
-    ...guides.map((guide) => ({
-      loc: `${site.url}/${guide.slug}/`,
-      priority: guide.priority <= 6 ? '0.9' : '0.7'
-    }))
+    ...guides
+      .filter((guide) => !guide.noindex)
+      .map((guide) => ({
+        loc: `${site.url}/${guide.slug}/`,
+        priority: guide.priority <= 6 ? '0.9' : '0.7'
+      }))
   ];
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
