@@ -4,7 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { site } from '../data/guides';
 
 const title = 'Privacy Policy';
-const description = 'Privacy Policy for Subnautica 2 Guide, including contact data, server logs, cookies, and future Google AdSense disclosures.';
+const description = 'Privacy Policy for Subnautica 2 Guide, including contact data, server logs, Google Analytics, cookies, and future Google AdSense disclosures.';
 ---
 
 <BaseLayout title={title} description={description} canonical={`${site.url}/privacy-policy/`}>
@@ -21,7 +21,7 @@ const description = 'Privacy Policy for Subnautica 2 Guide, including contact da
     <ul>
       <li>Basic server log data, such as IP address, browser type, referring page, pages viewed, and request time.</li>
       <li>Information you send by email, such as your email address and message content.</li>
-      <li>Cookie or similar identifier data if analytics, advertising, or embedded third-party services are enabled.</li>
+      <li>Cookie or similar identifier data from analytics, advertising, or embedded third-party services when those services are enabled.</li>
     </ul>
 
     <h2>How We Use Information</h2>
@@ -31,6 +31,14 @@ const description = 'Privacy Policy for Subnautica 2 Guide, including contact da
       <li>To understand site performance and content quality.</li>
       <li>To display and measure ads if advertising is enabled.</li>
     </ul>
+
+    <h2>Google Analytics</h2>
+    <p>
+      This site uses Google Analytics to understand page views, traffic sources,
+      device and browser information, and general content performance. Google
+      Analytics may use cookies or similar technologies to measure site usage.
+      We use this information to improve guide coverage and site usability.
+    </p>
 
     <h2>Advertising and Google AdSense</h2>
     <p>
@@ -50,8 +58,9 @@ const description = 'Privacy Policy for Subnautica 2 Guide, including contact da
 
     <h2>Cookies</h2>
     <p>
-      Cookies may be used for basic site operation, analytics, advertising,
-      fraud prevention, frequency capping, and ad measurement. See our
+      Cookies may be used for basic site operation, Google Analytics,
+      advertising if ads are enabled later, fraud prevention, frequency capping,
+      and ad measurement. See our
       <a class="text-link" href="/cookie-policy/">Cookie Policy</a> for more detail.
     </p>
 
