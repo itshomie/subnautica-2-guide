@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/guides';
+
+const title = 'Contact';
+const description = 'Contact Subnautica 2 Guide for corrections, editorial questions, rights requests, privacy questions, or general feedback.';
+---
+
+<BaseLayout title={title} description={description} canonical={`${site.url}/contact/`}>
+  <section class="content-page">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact/' }]} />
+    <p class="eyebrow">Contact</p>
+    <h1>Contact Subnautica 2 Guide</h1>
+    <p>
+      For corrections, editorial questions, rights requests, privacy questions,
+      or general feedback, email us at
+      <a class="text-link" href="mailto:support@subnautica-2-guide.com">support@subnautica-2-guide.com</a>.
+    </p>
+    <div class="notice-block">
+      <strong>Useful context to include</strong>
+      <ul>
+        <li>The page URL you are writing about.</li>
+        <li>The correction, question, or request.</li>
+        <li>Any source link that helps verify the issue.</li>
+      </ul>
+    </div>
+    <p>
+      We are an unofficial fan-made guide site and cannot provide official game
+      support. For account, purchase, platform, or official support issues,
+      contact the relevant platform or Unknown Worlds support channels.
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/guides';
+
+const title = 'Editorial Policy';
+const description = 'Editorial Policy for Subnautica 2 Guide, covering sources, Early Access updates, original visuals, corrections, and affiliate or advertising separation.';
+---
+
+<BaseLayout title={title} description={description} canonical={`${site.url}/editorial-policy/`}>
+  <section class="content-page">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Editorial Policy', href: '/editorial-policy/' }]} />
+    <p class="eyebrow">Last updated: May 18, 2026</p>
+    <h1>Editorial Policy</h1>
+    <p>
+      Subnautica 2 Guide is built as a text-first guide hub for
+      players. The goal is to provide useful navigation, checklists, FAQs, and
+      update notes without presenting speculative content as confirmed fact.
+    </p>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>Official Steam and Unknown Worlds pages are preferred for release status, platform, roadmap, and update information.</li>
+      <li>Patch-sensitive advice is labeled with the latest review date.</li>
+      <li>Uncertain details are labeled clearly or presented as checklists rather than confirmed routes.</li>
+    </ul>
+
+    <h2>Original Visuals</h2>
+    <p>
+      Visuals are original explanatory illustrations created for readability.
+      They are not official media, exact route proof, or exact
+      map data.
+    </p>
+
+    <h2>Corrections</h2>
+    <p>
+      To request a correction, email
+      <a class="text-link" href="mailto:support@subnautica-2-guide.com">support@subnautica-2-guide.com</a>
+      with the page URL and the source for the correction.
+    </p>
+
+    <h2>Advertising Independence</h2>
+    <p>
+      Advertising, if enabled, does not determine guide conclusions, page
+      recommendations, or editorial labels.
+    </p>
+  </section>
+</BaseLayout>

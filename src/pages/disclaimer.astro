@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/guides';
+
+const title = 'Disclaimer';
+const description = 'Disclaimer for Subnautica 2 Guide, including unofficial fan-site status, trademarks, Early Access changes, and visual asset policy.';
+---
+
+<BaseLayout title={title} description={description} canonical={`${site.url}/disclaimer/`}>
+  <section class="content-page">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Disclaimer', href: '/disclaimer/' }]} />
+    <p class="eyebrow">Last updated: May 18, 2026</p>
+    <h1>Disclaimer</h1>
+
+    <h2>Unofficial Fan Site</h2>
+    <p>
+      Subnautica 2 Guide is an unofficial fan-made guide site. Subnautica and
+      Unknown Worlds are trademarks or registered trademarks of Unknown Worlds
+      Entertainment, Inc. This site is not affiliated with or endorsed by
+      Unknown Worlds Entertainment.
+    </p>
+
+    <h2>Early Access Content</h2>
+    <p>
+      Subnautica 2 is an Early Access game. Guide details, progression,
+      resources, tools, vehicles, multiplayer behavior, and roadmap information
+      may change as the game updates.
+    </p>
+
+    <h2>Visuals</h2>
+    <p>
+      Original illustrations on this site are explanatory visuals. They are not
+      official assets, official maps, or exact game-location evidence.
+    </p>
+
+    <h2>External Links</h2>
+    <p>
+      This site may link to Steam, Unknown Worlds, Google, or other external
+      sites. We are not responsible for the content or policies of external
+      websites.
+    </p>
+  </section>
+</BaseLayout>

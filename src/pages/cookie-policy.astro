@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/guides';
+
+const title = 'Cookie Policy';
+const description = 'Cookie Policy for Subnautica 2 Guide, including essential cookies, analytics, advertising cookies, and user controls.';
+---
+
+<BaseLayout title={title} description={description} canonical={`${site.url}/cookie-policy/`}>
+  <section class="content-page">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Cookie Policy', href: '/cookie-policy/' }]} />
+    <p class="eyebrow">Last updated: May 18, 2026</p>
+    <h1>Cookie Policy</h1>
+    <p>
+      Cookies are small files stored on your device. This site may use cookies
+      or similar technologies for site operation, analytics, advertising, and
+      security.
+    </p>
+
+    <h2>Types of Cookies</h2>
+    <ul>
+      <li><strong>Essential cookies:</strong> help the site load, secure requests, and remember basic technical preferences.</li>
+      <li><strong>Analytics cookies:</strong> may help us understand which pages are useful and where the site needs improvement.</li>
+      <li><strong>Advertising cookies:</strong> may be used by Google AdSense or other advertising partners to serve, measure, and personalize ads.</li>
+    </ul>
+
+    <h2>Google Advertising Cookies</h2>
+    <p>
+      If Google ads are enabled, Google may use cookies associated with Google
+      domains, including doubleclick.net or country-specific Google domains.
+      These cookies can help serve relevant ads, measure ad performance, and
+      avoid showing the same ad too often.
+    </p>
+
+    <h2>Your Choices</h2>
+    <ul>
+      <li>You can control or delete cookies through your browser settings.</li>
+      <li>You can opt out of personalized Google ads at <a class="text-link" href="https://www.google.com/settings/ads" rel="nofollow noopener" target="_blank">Google Ads Settings</a>.</li>
+      <li>You can review broader interest-based advertising choices at <a class="text-link" href="https://www.aboutads.info/choices/" rel="nofollow noopener" target="_blank">AboutAds.info</a>.</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about cookies can be sent to
+      <a class="text-link" href="mailto:support@subnautica-2-guide.com">support@subnautica-2-guide.com</a>.
+    </p>
+  </section>
+</BaseLayout>

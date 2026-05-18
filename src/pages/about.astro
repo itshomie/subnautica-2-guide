@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/guides';
+
+const title = 'About';
+const description =
+  'About Subnautica 2 Guide, an unofficial fan-made guide site for Early Access survival routes, resources, tools, co-op, and updates.';
+---
+
+<BaseLayout title={title} description={description} canonical={`${site.url}/about/`}>
+  <section class="content-page">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }]} />
+    <p class="eyebrow">About this site</p>
+    <h1>Unofficial Subnautica 2 guide hub</h1>
+    <p>
+      Subnautica 2 Guide is built as a practical Early Access guide site:
+      beginner routes, walkthrough checkpoints, resource pages, tools, vehicles,
+      base building, multiplayer, map notes, and update tracking.
+    </p>
+    <p>
+      The site uses official references, original explanatory visuals, and
+      patch freshness labels instead of copied gameplay media. Early Access
+      games change, so every page shows a freshness note and update-sensitive
+      wording.
+    </p>
+    <div class="notice-block">
+      <strong>Fan site disclaimer</strong>
+      <p>
+        Subnautica 2 Guide is an unofficial fan-made guide site. Subnautica and
+        Unknown Worlds are trademarks or registered trademarks of Unknown Worlds
+        Entertainment, Inc. This site is not affiliated with or endorsed by
+        Unknown Worlds Entertainment.
+      </p>
+    </div>
+    <h2>What We Publish</h2>
+    <ul>
+      <li>No official logo is used as this site's logo.</li>
+      <li>Pages use official references where possible.</li>
+      <li>Patch-sensitive advice shows the latest review date.</li>
+      <li>Guide visuals are original explanatory illustrations.</li>
+    </ul>
+  </section>
+</BaseLayout>

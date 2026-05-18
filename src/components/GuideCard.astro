@@ -1,0 +1,17 @@
+---
+import type { Guide } from '../data/guides';
+
+type Props = {
+  guide: Guide;
+  compact?: boolean;
+};
+
+const { guide, compact = false } = Astro.props;
+---
+
+<a class={`guide-card ${compact ? 'guide-card--compact' : ''}`} href={`/${guide.slug}/`}>
+  <span class="guide-card__category">{guide.category}</span>
+  <strong>{guide.shortTitle}</strong>
+  {!compact && <p>{guide.description}</p>}
+  <span class="guide-card__status">{guide.status}</span>
+</a>

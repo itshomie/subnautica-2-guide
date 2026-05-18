@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideCard from '../components/GuideCard.astro';
+import { getGuidesByCategory, guides, officialSources, site } from '../data/guides';
+
+const title = 'Subnautica 2 Guide: Complete Early Access Walkthrough, Tips, Resources & Map';
+const description =
+  'Complete Subnautica 2 guide for Early Access: beginner tips, walkthrough, resource locations, tools, vehicles, base building, multiplayer, roadmap updates, and survival strategies.';
+
+const startGuides = guides
+  .filter((guide) =>
+    [
+      'subnautica-2-beginners-guide',
+      'subnautica-2-walkthrough',
+      'subnautica-2-map',
+      'subnautica-2-resources',
+      'subnautica-2-multiplayer',
+      'subnautica-2-roadmap'
+    ].includes(guide.slug)
+  )
+  .sort((a, b) => a.priority - b.priority);
+
+const resourceGuides = getGuidesByCategory('Resources');
+const toolGuides = getGuidesByCategory('Tools');
+const latestGuides = guides.slice().sort((a, b) => a.priority - b.priority).slice(0, 12);
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Subnautica 2 Guide Hub',
+  itemListElement: guides.map((guide, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: guide.title,
+    url: `${site.url}/${guide.slug}/`
+  }))
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.url,
+  inLanguage: 'en',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${site.url}/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string'
+  }
+};
+
+const videoGameSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: 'Subnautica 2',
+  gamePlatform: ['PC', 'Xbox Series X|S'],
+  applicationCategory: 'Game',
+  genre: ['Survival', 'Adventure', 'Open world', 'Co-op'],
+  sameAs: ['https://store.steampowered.com/app/1962700/Subnautica_2/']
+};
+---
+
+<BaseLayout title={title} description={description} image="/images/hero-guide.jpg" jsonLd={[websiteSchema, videoGameSchema, itemListSchema]}>
+  <section class="hero full-bleed">
+    <img
+      class="hero__image"
+      src="/images/hero-guide.jpg"
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="eyebrow">Unofficial Early Access guide hub</p>
+      <h1>Subnautica 2 Guide</h1>
+      <p class="hero__copy">
+        A complete Early Access guide hub for beginner routes, walkthroughs,
+        resource locations, tools, vehicles, base building, multiplayer, and
+        update tracking.
+      </p>
+      <div class="hero__meta" aria-label="Guide freshness">
+        <span>Last updated: {site.lastUpdated}</span>
+        <span>Early Access build watch</span>
+      </div>
+      <div class="hero__actions" aria-label="Primary guide links">
+        <a href="/subnautica-2-beginners-guide/">Start beginner guide</a>
+        <a href="/subnautica-2-resources/">Find resources</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="section-heading">
+      <p class="eyebrow">Start here</p>
+      <h2>Pick the guide that matches your problem</h2>
+    </div>
+    <div class="guide-grid guide-grid--six">
+      {startGuides.map((guide) => <GuideCard guide={guide} />)}
+    </div>
+  </section>
+
+  <section class="section two-column">
+    <div class="section-heading sticky-heading">
+      <p class="eyebrow">First session route</p>
+      <h2>What to do first in Subnautica 2</h2>
+      <p>
+        The opening goal is not to swim far. It is to turn short safe loops into
+        tools, scans, storage, and a route back to your next objective.
+      </p>
+    </div>
+    <div class="section-stack">
+      <figure class="media-panel">
+        <img src="/images/beginner-loop.jpg" alt="Original five-step survival loop illustration for a beginner route" loading="lazy" decoding="async" />
+        <figcaption>Original planning illustration, for readability.</figcaption>
+      </figure>
+      <ol class="step-list">
+        <li>
+          <strong>Check the starting pod and active objectives.</strong>
+          Read every prompt before leaving the safe area.
+        </li>
+        <li>
+          <strong>Gather common materials before rare ones.</strong>
+          Early crafting stalls when you chase distant resources too soon.
+        </li>
+        <li>
+          <strong>Scan fragments as soon as possible.</strong>
+          Blueprints are often more important than raw materials.
+        </li>
+        <li>
+          <strong>Build storage and utility first.</strong>
+          A compact base should solve oxygen, crafting, and inventory friction.
+        </li>
+        <li>
+          <strong>Upgrade mobility before deep routes.</strong>
+          Vehicles and oxygen gear turn risky trips into repeatable routes.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading section-heading--row">
+      <div>
+        <p class="eyebrow">Resource locations</p>
+        <h2>Resource pages to start with</h2>
+      </div>
+      <a class="text-link" href="/subnautica-2-resources/">Open resources hub</a>
+    </div>
+    <figure class="wide-visual">
+      <img src="/images/resource-checklist.jpg" alt="Original resource checklist illustration with abstract underwater materials" loading="lazy" decoding="async" />
+      <figcaption>Original resource checklist illustration, for readability.</figcaption>
+    </figure>
+    <div class="resource-table-wrap">
+      <table class="resource-table">
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>Use</th>
+            <th>Status</th>
+            <th>Guide</th>
+          </tr>
+        </thead>
+        <tbody>
+          {resourceGuides.filter((guide) => guide.slug !== 'subnautica-2-resources').map((guide) => (
+            <tr>
+              <td>{guide.shortTitle}</td>
+              <td>{guide.quickFacts.find((fact) => fact.label === 'Use case')?.value ?? guide.intent}</td>
+              <td>{guide.status}</td>
+              <td><a href={`/${guide.slug}/`}>Read guide</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section split-band">
+    <div>
+      <p class="eyebrow">Tools and vehicles</p>
+      <h2>Unlocks that change what you can reach</h2>
+      <p>
+        Use these pages when a blueprint, crafting station, or missing material
+        blocks your next route. Each guide keeps the unlock path, recipe role,
+        and related resources close together.
+      </p>
+    </div>
+    <div class="guide-list">
+      {[...toolGuides, ...getGuidesByCategory('Vehicles')].map((guide) => (
+        <GuideCard guide={guide} compact />
+      ))}
+    </div>
+  </section>
+
+  <section class="section map-section">
+    <figure class="media-panel media-panel--large">
+      <img src="/images/route-notebook.jpg" alt="Original route notebook illustration with compass, depth, hazard, equipment, and check symbols" loading="lazy" decoding="async" />
+      <figcaption>Original route notebook illustration, for readability.</figcaption>
+    </figure>
+    <div class="section-heading">
+      <p class="eyebrow">Map and biomes</p>
+      <h2>Route planning without invented coordinates</h2>
+      <p>
+        Use the map guide as a route notebook for directions, depth ranges,
+        route risks, and Early Access caveats. It uses original explanatory
+        visuals instead of copied community media.
+      </p>
+      <div class="inline-actions">
+        <a href="/subnautica-2-map/">Map guide</a>
+        <a href="/subnautica-2-best-base-locations/">Base locations</a>
+        <a href={officialSources.steam.url} rel="nofollow noopener" target="_blank">Official media</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section two-column">
+    <div class="section-heading sticky-heading">
+      <p class="eyebrow">Early Access freshness</p>
+      <h2>Roadmap and update review</h2>
+      <p>
+        Unknown Worlds published an Early Access roadmap on May 15, 2026. Exact
+        routes, recipes, and co-op behavior can change after hotfixes and major
+        updates.
+      </p>
+      <div class="source-links" aria-label="Official references">
+        <a href={officialSources.steam.url} rel="nofollow noopener" target="_blank">{officialSources.steam.label}</a>
+        <a href={officialSources.roadmap.url} rel="nofollow noopener" target="_blank">{officialSources.roadmap.label}</a>
+      </div>
+    </div>
+    <div class="update-list">
+      <a href="/subnautica-2-roadmap/">
+        <strong>Roadmap tracker</strong>
+        <span>EA 1.1, EA 1.2, hotfixes, and guide update risk.</span>
+      </a>
+      <a href="/subnautica-2-early-access/">
+        <strong>Early Access explained</strong>
+        <span>What can change, what to trust, and when to wait.</span>
+      </a>
+      <a href="/subnautica-2-multiplayer/">
+        <strong>Multiplayer and co-op</strong>
+        <span>Solo, online co-op, cross-platform notes, and team workflow.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading section-heading--row">
+      <div>
+        <p class="eyebrow">Latest guides</p>
+        <h2>Guide library</h2>
+      </div>
+      <span class="count-badge">{guides.length} pages</span>
+    </div>
+    <div class="guide-grid">
+      {latestGuides.map((guide) => <GuideCard guide={guide} compact />)}
+    </div>
+  </section>
+
+  <section class="section faq-preview">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h2>Quick answers</h2>
+    </div>
+    <details open>
+      <summary>Is this the official Subnautica 2 website?</summary>
+      <p>No. This is an unofficial fan-made guide site and is not affiliated with or endorsed by Unknown Worlds Entertainment.</p>
+    </details>
+    <details>
+      <summary>Why do some guides say Early Access guide?</summary>
+      <p>Route notes and recipes may change during Early Access. Pages use official references and original explanatory visuals instead of copied gameplay media.</p>
+    </details>
+    <details>
+      <summary>Are the visuals official game images?</summary>
+      <p>No. Visuals are original explanatory illustrations used to make checklists and guide structure easier to scan.</p>
+    </details>
+  </section>
+
+</BaseLayout>
