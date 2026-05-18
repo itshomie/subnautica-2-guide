@@ -3,9 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GuideCard from '../components/GuideCard.astro';
 import { getGuidesByCategory, guides, officialSources, site } from '../data/guides';
 
-const title = 'Subnautica 2 Guide: Complete Early Access Walkthrough, Tips, Resources & Map';
+const title = 'Subnautica 2 Guide: Early Access Walkthrough, Resources, Tools & Routes';
 const description =
-  'Complete Subnautica 2 guide for Early Access: beginner tips, walkthrough, resource locations, tools, vehicles, base building, multiplayer, roadmap updates, and survival strategies.';
+  'Complete Subnautica 2 guide for Early Access: beginner tips, walkthrough, resource routes, tools, vehicles, base building, multiplayer, roadmap updates, and survival strategies.';
+
+const indexableGuides = guides.filter((guide) => !guide.noindex);
 
 const startGuides = guides
   .filter((guide) =>
@@ -22,13 +24,13 @@ const startGuides = guides
 
 const resourceGuides = getGuidesByCategory('Resources');
 const toolGuides = getGuidesByCategory('Tools');
-const latestGuides = guides.slice().sort((a, b) => a.priority - b.priority).slice(0, 12);
+const latestGuides = indexableGuides.slice().sort((a, b) => a.priority - b.priority).slice(0, 12);
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Subnautica 2 Guide Hub',
-  itemListElement: guides.map((guide, index) => ({
+  itemListElement: indexableGuides.map((guide, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: guide.title,
@@ -75,7 +77,7 @@ const videoGameSchema = {
       <h1>Subnautica 2 Guide</h1>
       <p class="hero__copy">
         A complete Early Access guide hub for beginner routes, walkthroughs,
-        resource locations, tools, vehicles, base building, multiplayer, and
+        resource routes, tools, vehicles, base building, multiplayer, and
         update tracking.
       </p>
       <div class="hero__meta" aria-label="Guide freshness">
@@ -161,7 +163,7 @@ const videoGameSchema = {
           </tr>
         </thead>
         <tbody>
-          {resourceGuides.filter((guide) => guide.slug !== 'subnautica-2-resources').map((guide) => (
+          {resourceGuides.filter((guide) => guide.slug !== 'subnautica-2-resources' && !guide.noindex).map((guide) => (
             <tr>
               <td>{guide.shortTitle}</td>
               <td>{guide.quickFacts.find((fact) => fact.label === 'Use case')?.value ?? guide.intent}</td>
@@ -197,15 +199,15 @@ const videoGameSchema = {
       <figcaption>Original route notebook illustration, for readability.</figcaption>
     </figure>
     <div class="section-heading">
-      <p class="eyebrow">Map and biomes</p>
+      <p class="eyebrow">Routes and biomes</p>
       <h2>Route planning without invented coordinates</h2>
       <p>
-        Use the map guide as a route notebook for directions, depth ranges,
+        Use the route guide as a notebook for directions, depth ranges,
         route risks, and Early Access caveats. It uses original explanatory
         visuals instead of copied community media.
       </p>
       <div class="inline-actions">
-        <a href="/subnautica-2-map/">Map guide</a>
+        <a href="/subnautica-2-map/">Route guide</a>
         <a href="/subnautica-2-best-base-locations/">Base locations</a>
         <a href={officialSources.steam.url} rel="nofollow noopener" target="_blank">Official media</a>
       </div>
@@ -248,7 +250,7 @@ const videoGameSchema = {
         <p class="eyebrow">Latest guides</p>
         <h2>Guide library</h2>
       </div>
-      <span class="count-badge">{guides.length} pages</span>
+      <span class="count-badge">{indexableGuides.length} index-ready pages</span>
     </div>
     <div class="guide-grid">
       {latestGuides.map((guide) => <GuideCard guide={guide} compact />)}
